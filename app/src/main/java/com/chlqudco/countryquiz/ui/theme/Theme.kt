@@ -1,57 +1,49 @@
 package com.chlqudco.countryquiz.ui.theme
 
-import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = OceanGreenDark,
+    onPrimary = Color(0xFF003735),
+    primaryContainer = Color(0xFF00504C),
+    onPrimaryContainer = Color(0xFFA2F2EA),
+    secondary = Color(0xFF9DCCDA),
+    tertiary = Color(0xFFFFB4A6),
+    background = DarkBackground,
+    surface = DarkSurface,
+    surfaceVariant = Color(0xFF253236),
+    onBackground = Color(0xFFE1E9E8),
+    onSurface = Color(0xFFE1E9E8)
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
+    primary = OceanGreen,
     onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primaryContainer = SoftMint,
+    onPrimaryContainer = Color(0xFF003735),
+    secondary = SkyBlue,
+    tertiary = Coral,
+    background = WarmSand,
+    surface = Color.White,
+    surfaceVariant = Color(0xFFF0F4F3),
+    onBackground = Ink,
+    onSurface = Ink,
+    onSurfaceVariant = MutedInk,
+    error = Color(0xFFB3261E)
 )
 
 @Composable
 fun CountryQuizTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme,
         typography = Typography,
         content = content
     )
